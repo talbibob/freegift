@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Générateur de cadeaux gratuits 🎁</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      color: #2ecc71;
+    }
+    button {
+      font-size: 28px;
+      padding: 20px 50px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    #emoji {
+      font-size: 60px;
+      margin-top: 40px;
+      transition: transform 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎁 Clique ici pour récupérer ton cadeau gratuit ! 🎁</h1>
+  <button onclick="jouerBip()">Activer</button>
+  <div id="emoji">😈</div>
+
+  <script>
+    function jouerBip() {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'square'; // Son agressif
+      osc.frequency.value = 1200; // Fréquence du bip
+
+      gain.gain.value = 1; // Volume max ⚠️
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start();
+      setTimeout(() => {
+        osc.stop();
+      }, 3000); // Bip pendant 3 secondes
+
+      // Animation du visage
+      const emoji = document.getElementById('emoji');
+      emoji.style.transform = 'scale(1.5) rotate(20deg)';
+      setTimeout(() => {
+        emoji.style.transform = 'scale(1) rotate(0deg)';
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
